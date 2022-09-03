@@ -7,11 +7,11 @@
 
 
 
-int[] arry = {3, 7, 22, 2, 78};
+double[] arry = {3, 7, 22, 2, 78};
 int i = 0;
-int max = 0;
-int min = arry[0];
-int ter = 0;
+double max = 0;
+double min = arry[0];
+double ter = 0;
 while (i < arry.Length)
 {
     if (arry[i] >= max)

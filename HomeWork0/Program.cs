@@ -7,16 +7,22 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,7; 5,7; 3,7; 3.
 
+
+
+
 Console.Write("Введите количество строк m: ");
 int m = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите количесвто столбцов n: ");
 int n = Convert.ToInt32(Console.ReadLine());
-double[,] Arry = Marry(m, n, 0, 10);
 
-PrintMatrix(Arry);
-double[,] Marry(int a, int b, int left, int right)
+
+int[,] ourMatrix = Getmatrix(m, n, 0, 5);
+PrintMatrix(ourMatrix);
+
+
+int[,] Getmatrix(int roumCount, int columsCount, int right, int left)
 {
-    double[,] matrix = new double[a, b];
+    int[,] matrix = new int[roumCount, columsCount];
     Random random = new Random();
 
     for (int i = 0; i < matrix.GetLength(0); i++)
@@ -24,39 +30,41 @@ double[,] Marry(int a, int b, int left, int right)
 
         for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            matrix[i, j] = random.Next(left, right);
+            matrix[i, j] = random.Next(right, left);
 
         }
+
     }
     return matrix;
 }
 
-void PrintMatrix(double[,] Hematrix)
+void PrintMatrix(int[,] matrix)
 {
-    for (int i = 0; i < Hematrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        for (int j = 0; j < Hematrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            Console.Write(Hematrix[i, j] + "   ");
+            Console.Write(matrix[i, j] + " ");
         }
         Console.WriteLine();
     }
 }
-Console.WriteLine("--------------------------------------");
-Console.WriteLine($"Среднее арифметическое элементов в каждом столбце: ");
-SummMatrix(Arry);
-void SummMatrix(double[,] Hematrix)
-{
+Console.WriteLine($"----------------");
+Console.WriteLine($"Cреднее арифметическое элементов в каждом столбце");
 
-    for (int i = 0; i < Hematrix.GetLength(1); i++)
+SummMatrix(ourMatrix);
+void SummMatrix(int[,] matrix)
+{
+    for (int i = 0; i < matrix.GetLength(1); i++)
     {
         double summ = 0;
-        for (int j = 0; j < Hematrix.GetLength(0); j++)
+        for (int j = 0; j < matrix.GetLength(0); j++)
         {
-            summ = summ + Hematrix[j, i];
+            summ = summ + matrix[j, i];
 
         }
         
-        Console.Write($"{summ / Hematrix.GetLength(0)} ");
+        Console.Write($"{summ/matrix.GetLength(0)} ");
     }
+
 }

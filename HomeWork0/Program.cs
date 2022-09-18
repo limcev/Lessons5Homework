@@ -1,25 +1,23 @@
-﻿// Задача 52. Задайте двумерный массив из целых чисел. 
-// Найдите среднее арифметическое элементов в каждом столбце.
-
+﻿// Задача 54: Задайте двумерный массив. Напишите программу, 
+// которая упорядочит по возрастанию элементы каждой строки двумерного массива.
 // Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
 // 8 4 2 4
-// Среднее арифметическое каждого столбца: 4,7; 5,7; 3,7; 3.
-
-
-
-
+// В итоге получается вот такой массив:
+// 1 2 4 7
+// 2 3 5 9
+// 2 4 4 8
 Console.Write("Введите количество строк m: ");
 int m = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите количесвто столбцов n: ");
 int n = Convert.ToInt32(Console.ReadLine());
 
-
-int[,] ourMatrix = Getmatrix(m, n, 0, 5);
+int[,] ourMatrix = Getmatrix(m, n, 0, 10);
 PrintMatrix(ourMatrix);
-
-
+Gtmatrix(ourMatrix);
+Console.WriteLine();
+PrintMatrix(ourMatrix);
 int[,] Getmatrix(int roumCount, int columsCount, int right, int left)
 {
     int[,] matrix = new int[roumCount, columsCount];
@@ -39,6 +37,7 @@ int[,] Getmatrix(int roumCount, int columsCount, int right, int left)
 }
 
 void PrintMatrix(int[,] matrix)
+
 {
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
@@ -49,22 +48,27 @@ void PrintMatrix(int[,] matrix)
         Console.WriteLine();
     }
 }
-Console.WriteLine($"----------------");
-Console.WriteLine($"Cреднее арифметическое элементов в каждом столбце");
 
-SummMatrix(ourMatrix);
-void SummMatrix(int[,] matrix)
+
+void Gtmatrix(int[,] matrix)
 {
-    for (int i = 0; i < matrix.GetLength(1); i++)
+    for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        double summ = 0;
-        for (int j = 0; j < matrix.GetLength(0); j++)
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            summ = summ + matrix[j, i];
 
+
+            for (int t = 0; t < matrix.GetLength(1) - 1; t++)
+            {
+                int temp = 0;
+                if (matrix[i, t] > matrix[i, t + 1])
+                {
+                    temp = matrix[i, t];
+                    matrix[i, t] = matrix[i, t + 1];
+                    matrix[i, t + 1] = temp;
+                    t++;
+                }
+            }
         }
-        
-        Console.Write($"{summ/matrix.GetLength(0)} ");
     }
-
 }
